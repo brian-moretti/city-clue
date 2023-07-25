@@ -1,0 +1,61 @@
+<main class="container">
+  <app-header></app-header>
+
+  <section class="form">
+    <form (ngSubmit)="onSubmit()" #searchInput="ngForm">
+      <input
+        type="text"
+        name="search"
+        id="search"
+        required
+        [(ngModel)]="inputSearch"
+        (input)="filterCity(inputSearch)"
+      />
+      <div [ngClass]="inputSearch ? 'show-city' : 'hidden'">
+        <button
+          name="button"
+          type="submit"
+          [ngStyle]="{ display: 'block' }"
+          *ngFor="let city of filteredCity"
+          (click)="returnValue(city)"
+        >
+          {{ city }}
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <section class="city-information">
+    <ng-container *ngIf="notSearched">
+      <div class="city">
+        <div class="city-name">
+          <h2>{{ cityFullName }}</h2>
+          <h5>{{ continentOfCity }}</h5>
+        </div>
+        <div class="city-images">
+          <picture>
+            <source
+              media="(max-width:699px)"
+              [srcset]="cityImages.photos[0].image.mobile"
+            />
+            <img
+              [src]="cityImages.photos[0].image.web"
+              [alt]="cityFullName + 'image'"
+            />
+          </picture>
+        </div>
+      </div>
+      <p class="summary" [innerHTML]="cityCategories.summary"></p>
+      <section class="details">
+        <ng-container *ngFor="let category of cityCategories.categories">
+          <div class="categories">
+            <h6>{{ category.name }}</h6>
+            <p-knob [(ngModel)]="category.score_out_of_10"></p-knob>
+            <h6>{{ category.score_out_of_10 | number : "1.0-1" }}</h6>
+          </div>
+        </ng-container>
+      </section>
+    </ng-container>
+  </section>
+  <app-footer></app-footer>
+</main>

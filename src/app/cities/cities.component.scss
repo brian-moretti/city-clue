@@ -1,0 +1,61 @@
+.show-city {
+  background-color: grey;
+  width: 200px;
+  border: 1px solid red;
+  overflow-y: scroll;
+  height: fit-content;
+  max-height: 150px;
+  margin: 0 auto;
+}
+
+.hidden {
+  display: none;
+}
+
+form {
+  text-align: center;
+}
+
+form input {
+  width: 200px;
+}
+
+.city{
+  position: relative;
+  margin: 3rem auto;
+}
+
+.city-name{
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid red;
+  padding: 2rem;
+  background-color: white;
+  box-shadow: 0 0 10px 15px white;
+}
+
+img {
+  width: 100%;
+  height: 50vh;
+}
+
+
+.details {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 3rem;
+  margin: 3rem auto;
+}
+
+.categories {
+  flex: 1 0 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
