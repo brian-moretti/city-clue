@@ -13,25 +13,26 @@ Welcome to my 'City Clue' application. This application is build using the API a
 ### :computer: Main functionality
 
 - **Input Textbox:** The application opens with a input textbox, used by the users to search cities.
-- As the user start to digit some characters below the input will appear a window with several button. Each button represent a specific city filtered by the key typed.
-- The user can navigate through the buttons even with the keyboard arrows
-- Once decided the user can click the button or press 'Enter' to submit and return all the information about the choosen city.
-  ![Screenshots of the application](/src/assets/github-screenshot/Screenshot%202023-08-01%20203756.png)
-  ![Screenshots of the window after the user types characters](/src/assets/github-screenshot/Screenshot%202023-08-01%20203820.png)
+
+  - As the user start to digit some characters below the input will appear a window with several button. Each button represent a specific city filtered by the key typed.
+  - The user can navigate through the buttons even with the keyboard arrows
+  - Once decided the user can click the button or press 'Enter' to submit and return all the information about the choosen city.
+    ![Screenshots of the application](/src/assets/github-screenshot/Screenshot%202023-08-01%20203756.png)
+    ![Screenshots of the window after the user types characters](/src/assets/github-screenshot/Screenshot%202023-08-01%20203820.png)
 
 - **City information :** Once submitted the application will show you:
-- An image of the city, with it's name and it's continent's name;
-- A description of the city
-- The total score provided by the Teleport API
-- A list of catagory with their relative scores
+  - An image of the city, with it's name and it's continent's name;
+  - A description of the city
+  - The total score provided by the Teleport API
+  - A list of catagory with their relative scores
 
 Coming back to the input texbox you can search another city and the view will automatically updated
 
 ![Screenshots of the city's informations](/src/assets/github-screenshot/Screenshot%202023-08-01%20203952.png)
 
 - **Other functionality:**:
-- If the name in the texbox is wrong or does not exist a message error will appear inviting the user to try again.
-- If a view is active showing a city the user can reset the view by clicking the title on the top of the page.
+  - If the name in the texbox is wrong or does not exist a message error will appear inviting the user to try again.
+  - If a view is active showing a city the user can reset the view by clicking the title on the top of the page.
 
 ### :hammer: How is build:
 
