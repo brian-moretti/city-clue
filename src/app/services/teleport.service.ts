@@ -1,41 +1,45 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { TeleportCity, TeleportCityImages, TeleportCityScores, TeleportItems } from '../models/teleport.model';
+import { Observable, catchError } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import {
+  TeleportCity,
+  TeleportCityImages,
+  TeleportCityScores,
+  TeleportItems,
+} from '../models/teleport.model';
+import { ErrorsService } from './errors.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TeleportService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private handleErrors: ErrorsService) {}
+
+  teleportAPI: string = environment.teleportAPI;
+  teleportAPICity: string = environment.teleportAPI + 'slug:';
 
   getTeleportCities(): Observable<TeleportItems> {
     return this.http
-      .get<TeleportItems>('https://api.teleport.org/api/urban_areas/')
-      .pipe();
+      .get<TeleportItems>(this.teleportAPI)
+      .pipe(catchError(this.handleErrors.handleHTTPErrors));
   }
 
   getTeleportCity(city: string): Observable<TeleportCity> {
-    return this.http.get<TeleportCity>(
-      `https://api.teleport.org/api/urban_areas/slug:${city}/`
-    );
+    return this.http
+      .get<TeleportCity>(`${this.teleportAPICity}${city}/`)
+      .pipe(catchError(this.handleErrors.handleHTTPErrors));
   }
 
   getTeleportCityScores(city: string): Observable<TeleportCityScores> {
-    return this.http.get<TeleportCityScores>(
-      `https://api.teleport.org/api/urban_areas/slug:${city}/scores/`
-    );
+    return this.http
+      .get<TeleportCityScores>(`${this.teleportAPICity}${city}/scores/`)
+      .pipe(catchError(this.handleErrors.handleHTTPErrors));
   }
 
   getTeleportCityImages(city: string): Observable<TeleportCityImages> {
-    return this.http.get<TeleportCityImages>(
-      `https://api.teleport.org/api/urban_areas/slug:${city}/images/`
-    );
-  }
-
-  getTeleportCityCities() {
-    return this.http.get(
-      'https://api.teleport.org/api/urban_areas/slug:los-angeles/cities/'
-    );
+    return this.http
+      .get<TeleportCityImages>(`${this.teleportAPICity}${city}/images/`)
+      .pipe(catchError(this.handleErrors.handleHTTPErrors));
   }
 }

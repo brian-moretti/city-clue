@@ -1,12 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
+@import "bootstrap/scss/bootstrap";
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,600;1,300;1,600&display=swap");
+:root {
+  --color: #030303;
+  --color2: #dde5b6;
+  --color3: #fbfbfb;
+  --color4: #a98467;
+}
 
-
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
+body {
+  background-color: var(--color2);
+  font-family: "Raleway";
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

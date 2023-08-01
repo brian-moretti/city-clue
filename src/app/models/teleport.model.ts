@@ -8,12 +8,13 @@ export interface TeleportItems {
 export interface TeleportCity {
   continent: string;
   full_name: string;
+  name: string
 }
 
 export interface TeleportCityScores {
   categories: [{  color: string; name: string; score_out_of_10: number  }];
   summary: string;
-  teleport_city_score: number; //! DA ARROTONDARE
+  teleport_city_score: number;
 }
 
 export interface TeleportCityImages {

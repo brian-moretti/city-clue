@@ -1,5 +1,5 @@
-<main class="container">
-  <app-header></app-header>
+<main class="container full-height">
+  <app-header (reload)="reloadPage()"></app-header>
 
   <section class="form">
     <form (ngSubmit)="onSubmit()" #searchInput="ngForm">
@@ -8,6 +8,8 @@
         name="search"
         id="search"
         required
+        placeholder="Discover your next city..."
+        autocomplete="off"
         [(ngModel)]="inputSearch"
         (input)="filterCity(inputSearch)"
       />
@@ -16,8 +18,9 @@
           name="button"
           type="submit"
           [ngStyle]="{ display: 'block' }"
-          *ngFor="let city of filteredCity"
+          *ngFor="let city of filteredCity; let i = index"
           (click)="returnValue(city)"
+          [tabindex]="selectedCity === i ? 0 : -1"
         >
           {{ city }}
         </button>
@@ -25,8 +28,12 @@
     </form>
   </section>
 
-  <section class="city-information">
-    <ng-container *ngIf="notSearched">
+  <ng-container *ngIf="errorFounded">
+    <div class="error">{{ errorMessage }}</div>
+  </ng-container>
+
+  <ng-container *ngIf="notSearched">
+    <section class="city-information">
       <div class="city">
         <div class="city-name">
           <h2>{{ cityFullName }}</h2>
@@ -45,17 +52,42 @@
           </picture>
         </div>
       </div>
-      <p class="summary" [innerHTML]="cityCategories.summary"></p>
-      <section class="details">
-        <ng-container *ngFor="let category of cityCategories.categories">
-          <div class="categories">
-            <h6>{{ category.name }}</h6>
-            <p-knob [(ngModel)]="category.score_out_of_10"></p-knob>
-            <h6>{{ category.score_out_of_10 | number : "1.0-1" }}</h6>
-          </div>
-        </ng-container>
-      </section>
-    </ng-container>
-  </section>
+      <div class="container-border">
+        <p class="summary" [innerHTML]="cityCategories.summary"></p>
+
+        <div class="total-score">
+          <h6>Total Score:</h6>
+          <p-knob
+            [(ngModel)]="cityCategories.teleport_city_score"
+            [min]="0"
+            [max]="100"
+            [size]="135"
+            [valueColor]="
+              returnTotalScoreColour(cityCategories.teleport_city_score)
+            "
+            [readonly]="true"
+            textColor="#030303"
+          ></p-knob>
+        </div>
+
+        <section class="details">
+          <ng-container *ngFor="let category of cityCategories.categories">
+            <div class="categories">
+              <h6>{{ category.name }}</h6>
+              <p-knob
+                [(ngModel)]="category.score_out_of_10"
+                [valueColor]="returnScoreColour(category.score_out_of_10)"
+                [min]="0"
+                [max]="10"
+                [readonly]="true"
+                textColor="#030303"
+                [style]="{ 'font-size': '1.5rem' }"
+              ></p-knob>
+            </div>
+          </ng-container>
+        </section>
+      </div>
+    </section>
+  </ng-container>
   <app-footer></app-footer>
 </main>
